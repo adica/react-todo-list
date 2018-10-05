@@ -12,3 +12,40 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+h1, p {
+  font-family: Lato;
+}
+
+.add {
+  margin-left: 5px;
+}
+
+ul {
+  padding: 0;
+}
+
+.item {
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.item.normal span{
+  color: red;
+}
+
+.item.done span {
+  color: green;
+  text-decoration: line-through
+}
+
+button {
+  text-decoration: none;
+  color: blue;
+}
+
+.remove {
+  margin-left: auto;
+  margin-right: 5px;
+}
