@@ -1,7 +1,7 @@
 import React from 'react';
-import cn from 'classnames';
 import Item from './item';
 import { items } from './../items';
+import './todolist.scss';
 
 export default class TodoList extends React.Component {
     constructor(props) {
@@ -33,7 +33,8 @@ export default class TodoList extends React.Component {
                 title: input.value,
                 done: false,
                 shown: false
-            }
+            };
+
             this.setState(() => ({
                 list: [...this.state.list, item]
             }), console.log('addItem'));
@@ -70,40 +71,55 @@ export default class TodoList extends React.Component {
         const list = this.state.list.map((i) => {
             i.done = e.target.checked;
             return i;
-        })
+        });
         this.setState({ list });
     }
 
     render() {
         return (
-            <div>
-                <h1>TodoList App</h1>
+            <div className="container">
+                <header className="header">
+                    <h1>TODOLIST APP <span>TODAY</span></h1>
+                </header>
 
-                <h3>items:</h3>
-                {!this.state.list.length && (
-                    <div>No items on the list</div>
-                )}
+                <section className="section">
+                    <div className="form">
+                        <input
+                            type="checkbox"
+                            className="mark-all"
+                            onClick={this.markAll}
+                        />
+                        <input
+                            type="text"
+                            className="text-input"
+                            ref={this.inputRef}
+                            onKeyPress={this.enterPressed}
+                        />
+                        <button
+                            className="add"
+                            onClick={this.addItem}>
+                            Add Item
+                        </button>
+                    </div>
 
-                {this.state.list && (
-                    <ul>
-                        {this.state.list.map(i => (
-                            <Item
-                                item={i}
-                                handleRemoveClick={this.removeItem}
-                                handleMarkAsDone={this.markAsDone}
-                            />
-                        ))}
 
-                    </ul>
-                )}
+                    {!this.state.list.length && (
+                        <div>No items on the list</div>
+                    )}
 
-                <input type="checkbox" onClick={this.markAll} />
-                <input
-                    type="text"
-                    ref={this.inputRef}
-                    onKeyPress={this.enterPressed}
-                />
-                <button className="add" onClick={this.addItem}>Add Item</button>
+                    {this.state.list && (
+                        <ul className="items-list">
+                            {this.state.list.map(i => (
+                                <Item
+                                    item={i}
+                                    handleRemoveClick={this.removeItem}
+                                    handleMarkAsDone={this.markAsDone}
+                                />
+                            ))}
+                        </ul>
+                    )}
+                </section>
+
 
             </div>
         )

@@ -9,15 +9,16 @@ export default function Item({ item, handleRemoveClick, handleMarkAsDone }) {
             id={item.id}
             className={itemClasses}
             key={item.id}>
+            <input
+                checked={item.done}
+                type="checkbox"
+                onClick={() => handleMarkAsDone(item)}
+            />
             <span>{item.title}</span>
             <button
                 className="remove"
                 onClick={() => handleRemoveClick(item)}>
-                Remove item
-            </button>
-            <button
-                onClick={() => handleMarkAsDone(item)}>
-                Mark as done
+                X
             </button>
         </li>
     );
