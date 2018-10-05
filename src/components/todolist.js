@@ -104,13 +104,15 @@ export default class TodoList extends React.Component {
 
 
                     {!this.state.list.length && (
-                        <div>No items on the list</div>
+                        <div className="no-items">No items on the list</div>
                     )}
 
                     {this.state.list && (
                         <ul className="items-list">
-                            {this.state.list.map(i => (
+                            {this.state.list.map((i, index) => (
                                 <Item
+                                    key={i.id}
+                                    index={index}
                                     item={i}
                                     handleRemoveClick={this.removeItem}
                                     handleMarkAsDone={this.markAsDone}

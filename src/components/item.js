@@ -1,14 +1,16 @@
 import React from 'react';
 import cn from 'classnames';
 
-export default function Item({ item, handleRemoveClick, handleMarkAsDone }) {
-    const itemClasses = cn('item ' + (item.done ? 'done' : 'normal'));
+export default function Item({ item, index, handleRemoveClick, handleMarkAsDone }) {
+    const itemClasses = cn('item', {
+        'done': item.done,
+        'even': index % 2 === 0
+    });
 
     return (
         <li
             id={item.id}
-            className={itemClasses}
-            key={item.id}>
+            className={itemClasses}>
             <input
                 checked={item.done}
                 type="checkbox"
