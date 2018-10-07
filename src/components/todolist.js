@@ -8,9 +8,9 @@ export default class TodoList extends React.Component {
         super(props);
 
         this.state = {
+            inputValue: '',
             list: [...items]
         };
-        this.inputRef = React.createRef();
 
         this.generateId = this.generateId.bind(this);
         this.addItem = this.addItem.bind(this);
@@ -18,29 +18,32 @@ export default class TodoList extends React.Component {
         this.markAsDone = this.markAsDone.bind(this);
         this.enterPressed = this.enterPressed.bind(this);
         this.markAll = this.markAll.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     generateId(min = 1, max = 1000) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+    handleInputChange(e){
+        this.setState({ inputValue: e.target.value });
+    }
+
     addItem() {
-        const input = this.inputRef.current;
-        if (input.value) {
+        if (this.state.inputValue) {
 
             const item = {
                 id: this.generateId(),
-                title: input.value,
+                title: this.state.inputValue,
                 done: false,
                 shown: false
             };
 
             this.setState(() => ({
+                inputValue: '',
                 list: [...this.state.list, item]
             }), console.log('addItem'));
 
-            input.value = '';
-            input.focus();
         }
     }
 
@@ -92,7 +95,8 @@ export default class TodoList extends React.Component {
                         <input
                             type="text"
                             className="text-input"
-                            ref={this.inputRef}
+                            value={this.state.inputValue}
+                            onChange={this.handleInputChange}
                             onKeyPress={this.enterPressed}
                         />
                         <button
