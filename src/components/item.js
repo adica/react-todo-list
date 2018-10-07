@@ -12,9 +12,9 @@ export default function Item({ item, index, handleRemoveClick, handleMarkAsDone 
             id={item.id}
             className={itemClasses}>
             <input
-                checked={item.done}
                 type="checkbox"
-                onClick={() => handleMarkAsDone(item)}
+                checked={item.done}
+                onChange={() => handleMarkAsDone(item)}
             />
             <span>{item.title}</span>
             <button
